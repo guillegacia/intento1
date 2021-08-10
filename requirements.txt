@@ -3,3 +3,6 @@ gunicorn
 flask-cors
 PyMySQL
 flask-restful
+requests
+bcrypt
+flask
