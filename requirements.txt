@@ -1,10 +1,3 @@
 Flask
 gunicorn
 flask-cors
-Werkzeug
-click
-itsdangerous
-MarkupSafe 
-Jinja2
-Six
-
