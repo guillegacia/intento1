@@ -1,0 +1,92 @@
+{% extends '/logged/base.html' %}
+
+{% block title %}logged | Mi cuenta{% endblock title %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <div class="alert alert-info alert-dismissible" style="position:absolute; top:70px; right:10px; font-size:20px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:6px;">&times;</a>  
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>  
+        <strong>Info!</strong> {{ message }}   
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+<div class="container-fluid">
+    <div class="title-heading">
+        <div class="container-h1"><div class="container-h1-h1"><h1>Datos&#160Personales</h1></div></div>
+    </div>
+    <div class="holder container-fluid pt-3">
+        <table class="table table-bordered table-hover" style="background-color: white;">
+            <tr>
+                <td>Usuario</td> 
+                <td>{{ session["login_user"] }}</td>
+            </tr>
+            <tr>
+                <td>Correo</td> 
+                <td>{{ session["email"] }} </td>
+            </tr>
+            <tr>
+                <td>Editar contraseña</td> 
+                <td>
+                    <div class="col-sm-5">  
+                        <a class="btn btn-success" href="{{ url_for('contraForm') }}">Update</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div class="title-heading">
+        <div class="container-h1"><div class="container-h1-h1"><h1>Registro&#160de&#160citas&#160personales</h1></div></div>
+    </div>
+    <div class="holder container-fluid pt-3">
+        <table class="table table-bordered table-hover" style="background-color: white;">
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Motivo</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                
+            </tr>
+        
+            {% for element in citaObj1 %}
+            <tr>
+                <td>{{ element["user"] }}</td>
+                <td>{{ element["nombre"] }}</td>
+                <td>{{ element["apellido"] }}</td>
+                <td>{{ element["correo"] }}</td>
+                <td>{{ element["telefono"] }}</td>
+                <td>{{ element["motivo"] }}</td>
+                <td>{{ element["fecha"] }}</td>
+                <td>{{ element["hora"] }}</td>
+                <td>{{ element["estado"] }}</td>
+
+                
+                
+            </tr>
+            {% endfor %}
+    
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+

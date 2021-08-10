@@ -1,0 +1,97 @@
+{% extends '/logged/base.html' %}
+
+{% block title %}Clidente | Citas{% endblock title %}
+
+{% block content %}
+
+     {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    
+    {% for message in messages %}
+
+    <div class="alert alert-info alert-dismissible" style="position:absolute; top:70px; right:10px; font-size:20px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:6px;">&times;</a>  
+        <strong>Info!</strong> {{ message }}   
+    </div>
+    
+    {% endfor %}
+    
+    {% endif %}
+
+    {% endwith %}
+
+    <div class="caja-section">
+        <br>
+        <section class="caja-cita">
+            <div class="caja-titulo">
+                Reserva tu cita
+            </div>
+            <div class="caja-campos">
+                <form id="cita" method="post" action="">
+                    <div class="caja-inputs">
+                        <label>Fecha*:</label>
+                        <input type="date" name="fecha" id="fecha" class="cajaci-input">
+                    </div>
+                    <div class="caja-inputs">
+                        <label for="nombre">Nombre*:</label>
+                        <input type="text" name="nombre" id="nombre" class="cajaci-input">
+                    </div>
+                    <div class="caja-inputs">
+                        <label for="apellido">Apellido*:</label>
+                        <input type="text" name="apellido" id="apellido" class="cajaci-input">
+                    </div>
+                    <div class="caja-inputs">
+                        <label for="correo">Correo electrónico*:</label>
+                        <input type="text" name="correo" id="correo" class="cajaci-input">
+                    </div>
+                    <div class="caja-inputs">
+                        <label for="telefono">Número telefónico*:</label>
+
+                        <input type="text" name="telefono" id="telefono" class="cajaci-input">
+                    </div>
+
+                    <div class="caja-inputs">
+                        <label for="motivo">Motivo de la cita*:</label><br>
+                        <textarea name="motivo" id="motivo" class="motivo" rows="5" cols="33"></textarea>
+                    </div>
+
+                    <div class="caja-inputs">
+                        <label for="hora">Selecciona el horario que prefieras*:</label>
+                        <select name="hora" id="hora" class="cajaci-input">
+                            <option value="9:00:00">9:00 AM - 10:00 AM</option>
+                            <option value="10:00:00">10:00 AM - 11:00 AM</option>
+                            <option value="11:00:00">11:00 AM - 12:00 PM</option>
+                            <option value="13:00:00">1:00 PM - 2:00 PM</option>
+                            <option value="14:00:00">2:00 PM - 3:00 PM</option>
+                            <option value="15:00:00">3:00 PM - 4:00 PM</option>
+                            <option value="16:00:00">4:00 PM - 5:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="caja-boton">
+                        <input type="submit" value="Agregar cita" class="caja-boton-css">
+                    </div>
+
+                    <div class="tabla tabla-citas">
+                        <div id="proximaCita" style="display:none">
+                            <div class="caja-titulo">
+                                Ha establecido su cita:
+                            </div>
+                            <table id="userTableClient" border="1" position="center">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <br>
+        <br>
+    </div>
+
+
+{% endblock content %}

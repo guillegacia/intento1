@@ -1,0 +1,74 @@
+{% extends '/admin/base.html' %}
+
+{% block title %}Admin | Tratamiento{% endblock title %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    
+    {% for message in messages %}
+
+    <div class="alert alert-info alert-dismissible" style="position:absolute; top:70px; right:10px; font-size:20px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:6px;">&times;</a>  
+        <strong>Info!</strong> {{ message }}   
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+<div class="container-fluid">
+    <div class="container-fluid title-heading">
+        <div class="container-h1"><div class="container-h1-h1"><h1>Registro&#160de&#160Tratamientos</h1></div></div>
+    </div>
+    <div class="container-fluid">
+        <a class="btn btn-success"
+            href="{{ url_for('tratamientosForm') }}">Agregar tratamiento</a>
+    </div>
+    <div class="holder container-fluid pt-3">
+        <table class="table table-bordered table-hover" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th style="max-width: 70px; word-wrap:break-word">Id</th>
+                    <th style="max-width: 150px; word-wrap:break-word">Nombre</th>
+                    <th style="max-width: 300px; word-wrap:break-word">Descripción</th>
+                    <th>Imagen</th>
+                    <th style="min-width: 250px; word-wrap:break-word">Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in tratamientoList %}
+                <tr>
+                    <td>{{ element["id"] }}</td>
+                    <td>{{ element["nombre"] }}</td>
+                    <td>{{ element["descripcion"] }}</td>
+                    <td><img src="{{ element["imagen"] }}" style="max-height:100px; max-width:100%;"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <a class="btn btn-success"
+                                    href="{{ url_for('tratamientosForm', type='update') }}&id={{ element['id'] }}">Update</a>
+                            </div>
+                            <div class="col-sm-5">
+                                <form action="{{ url_for('tratamientosDELETE') }}" method="post">
+                                    <input type="hidden" name="id" id="id" value="{{ element['id'] }}">
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}
+

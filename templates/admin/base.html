@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/logo.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% block customCss %}{% endblock customCss %}
+
+    <script src="/static/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/c143000470.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+                    <span class="navbar-toggler-icon"></span>
+                </button>   
+                <a class="navbar-brand" href="{{ url_for('inicio') }}">Clidente&#160&#160</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navb">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">Conócenos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('tratamientos') }}">Tratamientos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('productos') }}">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('cita') }}">Haz‎‎‏‏‎&#160tu‏‏‎&#160cita</a>
+                    </li>
+                    {% if session["role"] == "admin" %}
+
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Administración
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('citasCRUD') }}">Citas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('tratamientosCRUD') }}">Tratamientos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('addAdminCRUD') }}">Gestionar&#160administradores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('addClienteCRUD') }}">Gestionar&#160clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('proveedor') }}">Proveedores</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+                <ul class="navbar-nav navbar-right">
+
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><span class="iconify avatar"
+                            data-icon="carbon:user-avatar-filled" data-inline="false"></span>‏‏‎&#160&#160‏‏‎{{session["login_user"]}}
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right bg-dark">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('micuenta') }}">Mi&#160‏‏‎cuenta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('logout')}}">Cerrar&#160‏‏‎sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock content %}
+
+    <footer>
+        <div class="footer-basic">
+            <div class="footer-left">
+                <section class="footer-sections">
+                    <h2>Clidente</h2>
+                    <p>Clínica Dental, a tu servicio; nuestro objetivo es poderte ayudar en tener una buena salud bucal.</p>
+                </section>
+                <section class="footer-sections">
+                    <header>Nosotros</header>
+                    <a href="{{url_for('inicio')}}">Inicio</a>
+                    <a href="{{url_for('about')}}">Conócenos</a>
+                    <a href="{{url_for('contacto')}}">Contacto</a>
+                </section>
+                <section class="footer-sections">
+                    <header>Servicios</header>
+                    <a href="{{url_for('tratamientos')}}">Tratamientos</a>
+                    <a href="{{url_for('productos')}}">Productos</a>
+                    <a href="{{url_for('cita')}}">Haz tu cita</a>
+                </section>
+            </div>
+        </div>
+        <div class="footer-basic-1">
+            <div class="footer-left-1">
+                <section class="footer-sections-1">
+                    <p class="copyright">Clidente® 2021</p>
+                </section>
+                <section class="footer-sections-1">
+                    <div class="social">
+                        <a href="https://www.facebook.com/clinicadentalclidente/"><span class="iconify"
+                                data-icon="ant-design:facebook-filled" data-inline="false"></span></a>
+                        <a href="https://www.instagram.com/clidente_sv/"><span class="iconify"
+                                data-icon="ant-design:instagram-filled" data-inline="false"></span></a>
+                        <a href="https://wa.me/+50370842286/"><span class="iconify"
+                                data-icon="fa-brands:whatsapp-square" data-inline="false"></span></a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="/static/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block customScripts %}{% endblock customScripts %}
+</body>
+
+</html>

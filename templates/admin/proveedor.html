@@ -1,0 +1,40 @@
+{% extends '/admin/base.html' %}
+
+{% block title %}Proveedores{% endblock title %}
+
+{% block content %}
+
+<div class="title-heading">
+    <div class="container-h1"><div class="container-h1-h1"><h1>Catálogo&#160de&#160proveedores</h1></div></div>
+</div>
+
+<div style="margin: auto; max-width: 45%; text-align:center;">
+    <p>Artículos disponibles en el depósito dental El Rosario.</p>
+</div>
+
+<div class="tabla tabla-productos">
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Distribuidor</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Imagen</th>
+        </tr>
+        {% for proveedor in proveedorList %}
+        <tr>
+            <td>{{ proveedor["nombreProducto"] }}</td>
+            <td style="max-width: 900px;">{{ proveedor["descripcion"] }}</td>
+            <td>{{ proveedor["marca"] }}</td>
+            <td>{{ proveedor["empresa"] }}</td>
+            <td style="width: 90px;">$ {{ proveedor["precio"] }}.00</td>
+            <td>{{ proveedor["stock"] }}</td>
+            <td style="width: 150px;"><img src={{ proveedor["urlreference"]}}> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends '/admin/base.html' %}
+
+{% block title %}Admin | Citas{% endblock title %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    
+    {% for message in messages %}
+
+    <div class="alert alert-info alert-dismissible" style="position:absolute; top:70px; right:10px; font-size:20px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:6px;">&times;</a>  
+        <strong>Info!</strong> {{ message }}   
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+<div class="container-fluid">
+    <div class="container-fluid title-heading">
+        <div class="container-h1"><div class="container-h1-h1"><h1>Registro&#160de&#160citas</h1></div></div>  
+    </div>
+
+    <div class="holder container-fluid pt-3">
+        <table class="table table-bordered table-hover" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Usuario</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Nombre</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Apellido</th>
+                    <th style="max-width: 100px; word-wrap:break-word">Correo</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Teléfono</th>
+                    <th style="max-width: 100px; word-wrap:break-word">Motivo</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Fecha</th>
+                    <th style="max-width: 70px; word-wrap:break-word">Hora</th>
+                    <th style="max-width: 90px; word-wrap:break-word">Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in citaList %}
+                <tr>
+                    <td>{{ element["id"] }}</td>
+                    <td>{{ element["user"] }}</td>
+                    <td>{{ element["nombre"] }}</td>
+                    <td>{{ element["apellido"] }}</td>
+                    <td>{{ element["correo"] }}</td>
+                    <td>{{ element["telefono"] }}</td>
+                    <td>{{ element["motivo"] }}</td>
+                    <td>{{ element["fecha"] }}</td>
+                    <td>{{ element["hora"] }}</td>
+                    <th> {{ element["estado"] }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-success"
+                                    href="{{ url_for('citasForm', type='update') }}&id={{ element['id'] }}">Update</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <form action="{{ url_for('citasDELETE') }}" method="post">
+                                    <input type="hidden" name="id" id="id" value="{{ element['id'] }}">
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+

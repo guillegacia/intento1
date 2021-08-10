@@ -1,0 +1,72 @@
+{% extends '/admin/base.html' %}
+
+{% block title %}Admin | AddCliente{% endblock title %}
+
+{% block content %}
+<div class="position-caja">
+        {% with messages = get_flashed_messages() %}
+        
+        {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="alert alert-info alert-dismissible" style="position:absolute; top:70px; right:10px; font-size:20px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:6px;">&times;</a>  
+            <strong>Info!</strong> {{ message }}   
+        </div>
+            
+        {% endfor %}
+        
+        {% endif %}
+
+        {% endwith %}
+
+<div class="container-fluid">
+    <div class="container-fluid title-heading">
+        <div class="container-h1"><div class="container-h1-h1"><h1>Registro&#160de&#160clientes</h1></div></div>
+    </div>
+
+    <div class="holder container-fluid pt-3">
+        <table class="table table-bordered table-hover" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Usuario</th>
+                    <th>Correo</th>
+                    <th>Contraseña</th>
+                    <th>Salt</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in addClienteList %}
+                <tr>
+                    <td>{{ element["id"] }}</td>
+                    <td style="max-width: 100px; word-wrap:break-word">{{ element["user_name"] }}</td>
+                    <td style="max-width: 250px; word-wrap:break-word">{{ element["user_email"] }}</td>
+                    <td style="max-width: 400px; word-wrap:break-word"><p>{{ element["password"] }}</p></td>
+                    <td style="max-width: 200px; word-wrap:break-word">{{ element["salt"] }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <a class="btn btn-success"
+                                    href="{{ url_for('addClienteForm', type='update') }}&id={{ element['id'] }}">Update</a>
+                            </div>
+                            <div class="col-sm-5">
+                                <form action="{{ url_for('addClienteDELETE') }}" method="post">
+                                    <input type="hidden" name="id" id="id" value="{{ element['id'] }}">
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+

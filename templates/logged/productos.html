@@ -1,0 +1,39 @@
+{% extends '/logged/base.html' %}
+
+{% block title %}Productos{% endblock title %}
+
+{% block content %}
+
+    <div class="productos">
+        <div class="title-heading">
+            <div class="container-h1"><div class="container-h1-h1"><h1>Catálogo&#160de&#160productos&#160sugeridos</h1></div></div>
+        </div>
+        <div style="margin: auto; max-width: 45%; text-align:center;">
+            <p>Para una mejor salud bucal, te recomendamos utilizar los productos en la siguiente tabla. Recibe un descuento del 10 % en estos productos al visitar cualquier sucursal de Farmacias San Ignacio. Solo debes utilizar el siguiente código:</p>
+            <h5>CLIDENTESV</h5>
+        </div>
+        <div class="tabla tabla-productos">
+            <table border="1">
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Marca</th>
+                    <th>Precio</th>
+                    <!--<th>Stock</th>-->
+                    <th>Imagen</th>
+                </tr>
+                {% for product in productList %}
+                <tr>
+                    <td>{{ product["nombreProducto"] }}</td>
+                    <td style="max-width: 900px;">{{ product["descripcion"] }}</td>
+                    <td>{{ product["marca"] }}</td>
+                    <td style="width: 90px;">$ {{ product["precio"] }}.00</td>
+                    <!--<td>{{ product["stock"] }}</td>-->
+                    <td style="width: 150px;"><img src={{ product["urlreference"]}}> </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}
